@@ -124,7 +124,9 @@ def np_to_ims(array, fname='myfile.ims',
         fmt = '/DataSet/ResolutionLevel {r}/TimePoint {t}/Channel {c}/'
         for t in range(nt):
             for c in range(nc):
-                data = np.squeeze(array[t, c])
+                # Make sure we handle the case of number of z-stacks = 1
+                data = np.reshape(np.squeeze(array[t, c]), (nz, ny, nx))
+                #data = np.squeeze(array[t, c])
                 for r in range(nr):
                     if any([i > 1 for i in subsamp[r]]):
                         data = subsample_data(data, subsamp[r])
