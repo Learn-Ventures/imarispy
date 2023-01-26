@@ -11,7 +11,8 @@ def np_to_ims(array, fname='myfile.ims',
               chunks=((16, 128, 128), (64, 64, 64)),
               compression='gzip',
               thumbsize=256,
-              dx=0.1, dz=0.25):
+              dx=0.1, dz=0.25,
+              COLORS = ('0 1 0', '1 0 1', '1 1 0', '0 0 1')):
     """
     :param array: Supports numpy and dask arrays
     :param fname:
@@ -76,7 +77,7 @@ def np_to_ims(array, fname='myfile.ims',
         ('DataSetInfo/TimeInfo', ('FileTimePoints', nt)),
     ]
 
-    COLORS = ('0 1 0', '1 0 1', '1 1 0', '0 0 1')
+    #COLORS = ('0 1 0', '1 0 1', '1 1 0', '0 0 1')
     for c in range(nc):
         grp = 'DataSetInfo/Channel %s' % c
         GROUPS.append(grp)
