@@ -12,7 +12,8 @@ def np_to_ims(array, fname='myfile.ims',
               compression='gzip',
               thumbsize=256,
               dx=0.1, dz=0.25,
-              COLORS = ('0 1 0', '1 0 1', '1 1 0', '0 0 1')):
+              COLORS = ('0 1 0', '1 0 1', '1 1 0', '0 0 1'),
+              debug=False):
     """
     :param array: Supports numpy and dask arrays
     :param fname:
@@ -136,7 +137,8 @@ def np_to_ims(array, fname='myfile.ims',
                     curr_chunks = tuple(min(*n) for n in zip(chunks[r], data.shape))
                     if is_numpy:
                         # if array is a np.array, write to file immediately
-                        print("Writing: %s" % grp)
+                        if debug:
+                            print("Writing: %s" % grp)
                         hist, edges = np.histogram(data, 256)
                         grp.create_dataset('Data',
                                            data=data,
